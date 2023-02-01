@@ -1,6 +1,7 @@
 ---
 marp: true
 paginate: true
+
 ---
 
 ![bg left:30% 80%](https://raw.githubusercontent.com/statelyai/public-assets/main/logos/xstate-logo-black-nobg.svg)
@@ -73,7 +74,13 @@ This just is a photo of a bunch of cats sitting in boxes
 
 ---
 
-# Enter State Machines
+# Enter (Finite) State Machines
+
+<!--
+  - A finite state machine (sometimes called a finite state automaton) is a computation model that can be implemented with hardware or software and can be used to simulate sequential logic and some computer programs. 
+  - Finite state machines can be used to model problems in many fields including mathematics, artificial intelligence, games, and linguistics.
+  - Finite state automata generate regular languages. 
+-->
 
 ---
 
@@ -81,12 +88,79 @@ This just is a photo of a bunch of cats sitting in boxes
 ![bg right:70%](ParkingMeter.jpg)
 ![bg](fortnite-snake-eyes.gif)
 
+<!-- 
+  They can all be simulated by state machines
+-->
+
 
 ---
 
-<!-- _header: 'Modelling a cat' -->
+<!-- _header: 'Modelling My Cat' -->
 
 ![bg](CatStateMachine.png)
+
+---
+
+<iframe src="https://stately.ai/viz/040646b2-22db-4042-bc78-2a62225cc030"></iframe>
+
+---
+
+# Define your machine
+
+```tsx
+import { assign, createMachine } from "xstate";
+
+const machine = createMachine(
+  {
+    id: "A Typical Cat",
+    initial: "alive",
+    context: {
+      lives: 9,
+    },
+    states: {
+      alive: {
+        always: {
+          target: "dead",
+          cond: "isDead",
+        },
+        initial: "hungry",
+        states: {
+          hungry: {
+            on: {
+              FEED: "disappointed",
+            },
+          },
+          disappointed: {
+            on: {
+              PET: "hungry",
+            },
+          },
+        },
+        on: {
+          DIE: {
+            actions: ["diminishLives"],
+          },
+        },
+      },
+      dead: {
+        type: "final",
+      },
+    },
+  },
+  {
+    actions: {
+      diminishLives: assign({
+        lives: (ctx) => ctx.lives - 1,
+      }),
+    },
+    services: {},
+    guards: {
+      isDead: (ctx) => !ctx.lives,
+    },
+  }
+);
+
+```
 
 --- 
 
@@ -116,12 +190,41 @@ function MyFlow = () => {
 
 ---
 
+# Add a navigator
+
+```tsx
+
+const MyFlowStack = createNativeStackNavigator<MyFlowParamList>();
+
+function MyFlow = () => {
+
+  const machine = useInterpreter(myMachineDefinition, { ... })
+
+  return (
+    <MyMachineContext.Provider value={machine}>
+      <MyFlowStack.Navigator>
+        <MyFlowStack.Screen name="login" component={LoginScreen} />
+        <MyFlowStack.Screen name="authorizationError" component={AuthorizationErrorScreen} />
+      </MyFlowStack.Navigator>
+    </MyMachineContext.Provider>
+  )
+}
+
+```
+
+---
+
+something else
+
+---
+---
+
 # Use a hook to navigate
 
 ```ts
-const useNavigateForMyViews = () => {
+const useHandleNavigation = () => {
   const service = useContext(MyStateMachineContext)
-  const navigation = useNavigation();
+  const navigation = useNavigation<NativeStackNavigationProp<();
 
   useEffect(() => {    
     const subscription = service.subscribe((state) => {
