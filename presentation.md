@@ -97,11 +97,14 @@ This just is a photo of a bunch of cats sitting in boxes
 
 <!-- _header: 'Modelling My Cat' -->
 
-![bg](CatStateMachine.png)
+<iframe style="height: 100%;" src="https://stately.ai/viz/embed/040646b2-22db-4042-bc78-2a62225cc030?mode=viz&panel=code&showOriginalLink=1&readOnly=1&pan=0&zoom=0&controls=1" sandbox="allow-same-origin allow-scripts"></iframe>
 
 ---
 
-<iframe src="https://stately.ai/viz/040646b2-22db-4042-bc78-2a62225cc030"></iframe>
+<!-- _header: 'Modelling My Cat (cont)' -->
+
+
+<iframe style="height: 100%;" src="https://stately.ai/viz/embed/040646b2-22db-4042-bc78-2a62225cc030?mode=full&panel=code&showOriginalLink=1&readOnly=0&controls=1" sandbox="allow-same-origin allow-scripts"></iframe>
 
 ---
 
