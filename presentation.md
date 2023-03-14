@@ -8,28 +8,52 @@ paginate: true
 
 # **[XState] in React Native**
 
-## How I finaly managed to keep my views lean and my logic clean
+## How I finally managed to keep my views lean and my logic clean
 
 [XState]: http://xstate.js.org/
 
+Dario Villanueva 
+`@radiodario`
+
 ---
+
+# a bit about me:
+
+* [@radiodario](github.com/radiodario)
+* Bulding [Anyone](callinganyone.com) - a Voice Networking App
+* ex Meta Reality Labs
+* ex CTO at Feeld.co
+
+
+---
+
+# Unstable of Contents
 
 1. The problem with apps
-2. What are state machines
-3. How to use them in your projects
+2. What are Finite State Machines
+3. How does XState model FSMs
+3. How to use XState in your RN projects
+4. Some Pros/Cons with XState
 
 
 ---
 
+# Before we start, a lil' game
+
+---
 
 ![bg](ModularSynth.gif)
 
 <!-- Who can tell me what this is -->
 ---
-
+<!--
+_color: white
+-->
 # WRONG!
 
-This is a photo of a typical react native project
+# This is a photo of a typical react native project
+
+![bg](ModularSynth.gif)
 
 
 ---
@@ -40,10 +64,15 @@ This is a photo of a typical react native project
 
 ---
 
+<!--
+_color: white
+-->
+
 # WRONG!
 
-This is a photo of a typical redux store after a year
+# This is a photo of a typical redux store after a year of active development by 3 frontend developers.
 
+![bg](hoardersRoom.jpg)
 
 ---
 
@@ -52,10 +81,14 @@ This is a photo of a typical redux store after a year
 <!-- Who can tell me what this is -->
 
 ---
-
+<!--
+_color: white
+-->
 # WRONG!
 
-This just is a photo of a bunch of cats sitting in boxes
+# This is just a photo of a bunch of cats sitting in boxes
+
+![bg](catsInBoxes.jpg)
 
 ---
 
@@ -92,7 +125,63 @@ This just is a photo of a bunch of cats sitting in boxes
   They can all be simulated by state machines
 -->
 
+---
 
+
+# what is a Finite State Machine?
+
+
+<!--
+
+ ask anyone if they did informatics 101
+
+ A FSM is a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of states at any given time. it can change from one state to another in response to some inputs; the change from one state to another is called a transition.[1] An FSM is defined by a list of its states, its initial state, and the inputs that trigger each transition
+--->
+
+---
+
+
+# he's literally reading out the Wikipedia definition right now smh
+
+<!--
+ A FSM is a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of states at any given time. it can change from one state to another in response to some inputs; the change from one state to another is called a transition.[1] An FSM is defined by a list of its states, its initial state, and the inputs that trigger each transition
+--->
+
+---
+
+![bg cneter:50% 100%](turnstile_fsm.svg)
+
+<!--
+
+show the states
+initial state
+the transitions
+final state
+
+--->
+
+
+---
+
+
+# A litte bit about XState
+
+- JS / TS finite state machines for modern apps
+- by [@davidkpiano](https://github.com/davidkpiano) et al.
+- very active and lovely community [(discord)](https://discord.gg/xstate)
+- https://stately.ai/editor <- visual editor also
+- Really good VSCode Plugin
+- Automatic typegen for machines
+
+![bg right:35% 80%](https://raw.githubusercontent.com/statelyai/public-assets/main/logos/xstate-logo-black-nobg.svg)
+
+<!--
+  - by 
+-->
+
+---
+
+# Modelling a my cat with XState
 ---
 
 <!-- _header: 'Modelling My Cat' -->
@@ -108,55 +197,28 @@ This just is a photo of a bunch of cats sitting in boxes
 
 ---
 
-# Define your machine
+# Anatomy of a Cat Machine
 
 ```tsx
 import { assign, createMachine } from "xstate";
 
-const machine = createMachine(
+const CatMachine = createMachine(
   {
-    id: "A Typical Cat",
     initial: "alive",
     context: {
-      lives: 9,
+      lives: 9, // the internal "state" 
     },
     states: {
-      alive: {
-        always: {
-          target: "dead",
-          cond: "isDead",
-        },
-        initial: "hungry",
-        states: {
-          hungry: {
-            on: {
-              FEED: "disappointed",
-            },
-          },
-          disappointed: {
-            on: {
-              PET: "hungry",
-            },
-          },
-        },
-        on: {
-          DIE: {
-            actions: ["diminishLives"],
-          },
-        },
-      },
-      dead: {
-        type: "final",
-      },
+     // 
     },
   },
-  {
+  { // these are the options - you don't need to define these here
     actions: {
-      diminishLives: assign({
-        lives: (ctx) => ctx.lives - 1,
-      }),
+      // -- named actions here*
     },
-    services: {},
+    services: {
+      // -- services here
+    },
     guards: {
       isDead: (ctx) => !ctx.lives,
     },
@@ -167,15 +229,217 @@ const machine = createMachine(
 
 --- 
 
-# Wrap your flow in a context
+# States, events and transitions
+
 ```tsx
-const MyMachineContext = React.createContext<InterpreterFrom<typeof MyMachine>>();
 
-function MyFlow = () => {
+states: {
+  alive: { 
+    always: {
+      target: "dead",
+      cond: "isDead",
+    },
+    on: {
+      DIE: {
+        actions: ["diminishLives"],
+      },
+    },
+  },
+  dead: {
+    type: "final",
+  },
+}
+```
 
-  const machine = useInterpreter(myMachineDefinition, {
+<!---
+always transition will get evaluated everytime we re-enter the state
+on defines all the possible transitions from an event
+type: 'final' states are states where evaluation ends.
+---->
+---
+
+# States can be "nested" (child states)
+
+```tsx
+alive: {
+  initial: "hungry",
+  states: {
+    hungry: {
+      entry: 'meow',
+      on: {
+        FEED: "disappointed",
+      },
+    },
+    asleep: {
+      invoke: {
+        src: 'sleep',
+        onDone: 'hungry',
+      }
+    },
+    disappointed: {
+      on: {
+        PET: "hungry",
+      },
+    },
+  },
+}
+```
+
+---
+# Actions for side effects :boom:
+
+``` tsx
+actions: {
+  meow: () => {
+    console.log('meow');
+  },
+  diminishLives: assign({
+    lives: (ctx) => ctx.lives - 1,
+  }),
+}
+```
+
+<!--
+Logging something to the console
+Assigning a value to a variable
+Changing the attribute of a DOM node
+--->
+
+---
+
+
+# Machine Context
+
+aka your _infinite_ "states"
+
+```tsx
+context: {
+  lives: 9,
+  mood: 'disappointed',
+  awokenAt: new Date(),
+},
+```
+
+`assign` is an action lets you assign values to the context:
+
+```tsx
+actions: {
+  diminishLives: assign({
+    lives: (ctx, ev) => ctx.lives - 1,
+  }),
+}
+```
+
+<!--
+States are used for handling your apps states which you know about in advance. 
+Context is a data store that you can use to store any arbitrary values. 
+The assign action can be used to assign values to the context, and the context can be used in any action you call.
+--->
+
+---
+
+
+# Services :loop: (soon to be renamed to Actors)
+
+~~Services~~ Actors model long running processes
+
+```tsx
+{
+  asleep: {
+    invoke: {
+      src: 'sleep',
+    },
+  },
+}, {
+  services: {
+    sleep: async (ctx, ev) => {
+      return await DigestiveSystem.digest(ctx.food);
+    },
+  }
+}
+```
+
+<!--
+- long running
+- promises
+- observables
+- other machines
+-->
+
+---
+
+# Invoking services 🧙‍♂️
+
+```tsx
+asleep: {
+  invoke: {
+    id: 'sleep', // an id of your service
+    src: 'sleep', // the name of your service in machine opts
+    onDone: {
+      // what to do when your service finishes
+      // aka your promise returns
+      target: 'hungry',
+    },
+    onError: {
+      // error handling
+      target: 'sick',
+    },
+  },
+},
+```
+
+<!--
+- long running
+- async functions
+-->
+
+---
+
+# Guards - for conditional Transitions
+
+```tsx
+guards: {
+  isDead: (ctx: CatContext) => ctx.lives === 0,
+  isHungry: () => true, 
+}
+```
+
+---
+
+# READ THE DOCS
+
+# 👉 [here](https://stately.ai/docs/xstate) 👈
+
+
+<!--
+I left out a ton of stuff
+there's other stuff like actors, hierarchical states
+parallel states
+--->
+
+---
+
+# Integrating with React Native
+
+<!--
+
+no different than a regular react app
+just navigating between screens can be
+a bit tricky
+
+--->
+
+---
+# Wrap your flow in a context
+
+```tsx
+const CatMachineContext = React.createContext<InterpreterFrom<typeof CatMachine>>();
+
+function MyCat = () => {
+
+  const catMachine = useInterpreter(CatMachine, {
     actions: {
-      ...
+      meow: (ctx, ev) => console.log("Meow");
     },
     services: {
       ...
@@ -183,12 +447,11 @@ function MyFlow = () => {
   })
 
   return (
-    <MyMachineContext.Provider value={machine}>
+    <CatMachineContext.Provider value={catMachine}>
       ...
-    </MyMachineContext.Provider>
+    </CatMachineContext.Provider>
   )
 }
-
 ```
 
 ---
@@ -196,76 +459,147 @@ function MyFlow = () => {
 # Add a navigator
 
 ```tsx
+const CatFlowStack = createNativeStackNavigator<CatFlowParamList>();
 
-const MyFlowStack = createNativeStackNavigator<MyFlowParamList>();
+function CatFlow = () => {
 
-function MyFlow = () => {
-
-  const machine = useInterpreter(myMachineDefinition, { ... })
+  const catMachine = useInterpreter(CatMachine, {...});
 
   return (
-    <MyMachineContext.Provider value={machine}>
-      <MyFlowStack.Navigator>
-        <MyFlowStack.Screen name="login" component={LoginScreen} />
-        <MyFlowStack.Screen name="authorizationError" component={AuthorizationErrorScreen} />
-      </MyFlowStack.Navigator>
-    </MyMachineContext.Provider>
+     <CatMachineContext.Provider value={catMachine}>
+      <CatFlowStack.Navigator>
+        <CatFlowStack.Screen name="Hungry" component={HungryScreen} />
+        <CatFlowStack.Screen name="Asleep" component={AsleepScreen} />
+        <CatFlowStack.Screen name="Disappointed" component={DisappointedScreen} />
+        <CatFlowStack.Screen name="Dead" component={DeadScreen} />
+      </CatFlowStack.Navigator>
+    </CatMachineContext.Provider>
   )
 }
-
 ```
 
 ---
 
-something else
+# Grab your cat by the context:
+
+```tsx
+const HungryScreen = () => {
+
+  const catService = useContext(CatMachineContext); 
+
+  // subscribe only to what you need
+  const livesRemaining = useSelector(catService, 
+    current => current.context.lives,
+  );
+
+  return (
+    <View>
+      <Text>{livesRemaining} lives</Text>
+      <Image src="@assets/hungry-cat" />
+      <Button onPress={() => cat.send('FEED')} />
+    </View>
+  )
+};
+```
+
+<!--
+ the send function sends events to the machine
+--->
 
 ---
----
 
-# Use a hook to navigate
+# Use a hook to navigate by subscribing to state
 
-```ts
+```tsx
 const useHandleNavigation = () => {
-  const service = useContext(MyStateMachineContext)
-  const navigation = useNavigation<NativeStackNavigationProp<();
+  const catService = useContext(CatMachineContext)
+  const navigation = useNavigation();
 
   useEffect(() => {    
-    const subscription = service.subscribe((state) => {
-      if (state.matches("authorizationExpired")) {
-        navigation.navigate(
-          "AuthorizationError", { 
-            message: "Cannot authorise payments on this device.",
-        });
+    const subscription = catService.subscribe((state) => {
+      if (state.matches("alive.asleep")) {
+        navigation.navigate('Asleep');
       }
-    }
+      if (state.matches("alive.disappointed")) {
+        navigation.navigate('Disappointed');
+      }
+      // ... etc
+    });
     return subscription.unsubscribe;
-  }, [service, navigation]);
+  }, [catService, navigation]);
 }
 ```
+
+<!-- 
+this can be a bit cumbersome but also powerful. 
+it's up to you to use this way
+--->
 
 --- 
 
 # You get many things for free
 
 ```tsx
+const catService = useContext(MyStateMachineContext)
+const [currentState, send] = useActor(catService)
 
-const service = useContext(MyStateMachineContext)
-const service = useActor()
+// `can` will evaluate to true if the current state has any
+// valid transitions in the current state for that event
+
+<Button disabled={currentState.can('FEED')} />
 
 
+// you can show a spinner for long running services
+const isAsleep = useSelector(catService, 
+  current => current.matches('alive.asleep')
+);
+
+return (isAsleep && <Spinner>)
 ```
 
 ---
 
-### Some things to keep in mind
+# Why do this:
 
-* Autorefresh doesn't work
-* Keep state / context lean
+* Separates your logic and services from your view layer.
+* Keeps views short and clean
+* Reusable services / actions - swap out logic for mocks in tests
+* Do Model Based Testing ([it's _mental_](https://www.youtube.com/watch?v=tpNmPKjPSFQ))
+* Rearranging flows / moving things around is easy - just modify the transitions
+* Complex flows and logic doesn't mean complex views.
+* Flipper Plugin `react-native-flipper-xstate`
 
 ---
+# Some things to keep in mind
 
+* Autorefresh doesn't work if you change the state machine code `;_;`
+* Name your actions, trust me.
+* Keep state / context lean
+* If you listen to the state on views that are mounted, the views will refresh
+* prefer `useSelector` to `useActor` and grab only what you need from your context / state
+* nativeStackNavigator -> `freezeOnBlur` screenOption
+
+
+---
+<!---
+_header: 'A real life specimen of Anyone Post-call review machine'
+--->
+![bg 105%](review_machine.png)
+
+
+---
+![bg 100%](signup_flow_machine.png)
+
+
+---
 ### References and further reading
 
+* [Finite State Machines (pdf) - David Wright](https://web.archive.org/web/20140327131120/http://www4.ncsu.edu/~drwrigh3/docs/courses/csc216/fsm-notes.pdf)
 * [State machines are wonderful tools - Chris Wellons](https://nullprogram.com/blog/2020/12/31/)
 * [Rage Against the Finite-State Machines](https://learnyousomeerlang.com/finite-state-machines)
 * [Integrating XState with React Native and React Navigation - Simone D'Avico](https://medium.com/welld-tech/integrate-xstate-with-react-native-and-react-navigation-21ead87391da)
+
+---
+# Question Time
+
+![bg right:60% 90%](limmy_questions.jpg)
