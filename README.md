@@ -666,10 +666,13 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 ---
 # Question Time
 
-#
-
-
-slides 👇
-![slides](https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fradiodario.github.io%2Fxstate-on-react-native%2F&chs=200x200&chld=L|0)
 
 ![bg right:60% 90%](img/limmy_questions.jpg)
+
+---
+
+# Thank you
+
+# slides are there 😎👉👉
+
+![bg right:40% 80%](https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fradiodario.github.io%2Fxstate-on-react-native%2F&chs=400x400&chld=L|0)
