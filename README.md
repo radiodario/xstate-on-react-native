@@ -206,10 +206,10 @@ const CatMachine = createMachine(
   {
     initial: "alive",
     context: {
-      lives: 9, // the internal "state" 
+      lives: 9, // the data that change accross "states"
     },
     states: {
-     // 
+     // the states we can be in
     },
   },
   { // these are the options - you don't need to define these here
@@ -307,7 +307,6 @@ Changing the attribute of a DOM node
 
 ---
 
-
 # Machine Context
 
 aka your _infinite_ "states"
@@ -331,14 +330,12 @@ actions: {
 ```
 
 <!--
-States are used for handling your apps states which you know about in advance. 
+States are used for handling your apps' states which you know about in advance. 
 Context is a data store that you can use to store any arbitrary values. 
 The assign action can be used to assign values to the context, and the context can be used in any action you call.
 --->
 
 ---
-
-
 # Services :loop: (soon to be renamed to Actors)
 
 ~~Services~~ Actors model long running processes
@@ -368,7 +365,7 @@ The assign action can be used to assign values to the context, and the context c
 
 ---
 
-# Invoking services 🧙‍♂️
+# Invoking ~~services~~ Actors 🧙‍♂️
 
 ```tsx
 asleep: {
