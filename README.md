@@ -4,7 +4,9 @@ paginate: true
 
 ---
 
-![bg left:30% 80%](https://raw.githubusercontent.com/statelyai/public-assets/main/logos/xstate-logo-black-nobg.svg)
+![bg left:40% 80%](https://raw.githubusercontent.com/statelyai/public-assets/main/logos/xstate-logo-black-nobg.svg)
+
+
 
 # **[XState] in React Native**
 
@@ -14,6 +16,7 @@ paginate: true
 
 Dario Villanueva 
 `@radiodario`
+
 
 ---
 
@@ -419,7 +422,7 @@ guards: {
 # READ THE DOCS
 
 # 👉 [here](https://stately.ai/docs/xstate) 👈
-
+![bg right:50% 50%](https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fstately.ai%2Fdocs%2Fxstate&chs=200x200&chld=L|0)
 
 <!--
 I left out a ton of stuff
@@ -611,5 +614,11 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 
 ---
 # Question Time
+
+#
+
+
+slides 👇
+![slides](https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fradiodario.github.io%2Fxstate-on-react-native%2F&chs=200x200&chld=L|0)
 
 ![bg right:60% 90%](img/limmy_questions.jpg)
