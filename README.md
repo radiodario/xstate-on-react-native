@@ -42,7 +42,7 @@ Dario Villanueva
 
 ---
 
-![bg](ModularSynth.gif)
+![bg](img/ModularSynth.gif)
 
 <!-- Who can tell me what this is -->
 ---
@@ -53,12 +53,12 @@ _color: white
 
 # This is a photo of a typical react native project
 
-![bg](ModularSynth.gif)
+![bg](img/ModularSynth.gif)
 
 
 ---
 
-![bg](hoardersRoom.jpg)
+![bg](img/hoardersRoom.jpg)
 
 <!-- Who can tell me what this is -->
 
@@ -72,11 +72,11 @@ _color: white
 
 # This is a photo of a typical redux store after a year of active development by 3 frontend developers.
 
-![bg](hoardersRoom.jpg)
+![bg](img/hoardersRoom.jpg)
 
 ---
 
-![bg](catsInBoxes.jpg)
+![bg](img/catsInBoxes.jpg)
 
 <!-- Who can tell me what this is -->
 
@@ -88,7 +88,7 @@ _color: white
 
 # This is just a photo of a bunch of cats sitting in boxes
 
-![bg](catsInBoxes.jpg)
+![bg](img/catsInBoxes.jpg)
 
 ---
 
@@ -103,7 +103,7 @@ _color: white
 ---
 
 # And making forms shouldn't be that hard
-![bg left](formsBernard.gif)
+![bg left](img/formsBernard.gif)
 
 ---
 
@@ -118,8 +118,8 @@ _color: white
 ---
 
 # What do these two have in common?
-![bg right:70%](ParkingMeter.jpg)
-![bg](fortnite-snake-eyes.gif)
+![bg right:70%](img/ParkingMeter.jpg)
+![bg](img/fortnite-snake-eyes.gif)
 
 <!-- 
   They can all be simulated by state machines
@@ -149,7 +149,7 @@ _color: white
 
 ---
 
-![bg cneter:50% 100%](turnstile_fsm.svg)
+![bg cneter:50% 100%](img/turnstile_fsm.svg)
 
 <!--
 
@@ -581,11 +581,11 @@ return (isAsleep && <Spinner>)
 <!---
 _header: 'A real life specimen of Anyone Post-call review machine'
 --->
-![bg 105%](review_machine.png)
+![bg 105%](img/review_machine.png)
 
 
 ---
-![bg 100%](signup_flow_machine.png)
+![bg 100%](img/signup_flow_machine.png)
 
 
 ---
@@ -599,4 +599,4 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 ---
 # Question Time
 
-![bg right:60% 90%](limmy_questions.jpg)
+![bg right:60% 90%](img/limmy_questions.jpg)
