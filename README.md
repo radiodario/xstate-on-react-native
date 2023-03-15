@@ -123,16 +123,6 @@ h1 {
 
 ---
 
-# Enter (Finite) State Machines
-
-<!--
-  - A finite state machine (sometimes called a finite state automaton) is a computation model that can be implemented with hardware or software and can be used to simulate sequential logic and some computer programs. 
-  - Finite state machines can be used to model problems in many fields including mathematics, artificial intelligence, games, and linguistics.
-  - Finite state automata generate regular languages. 
--->
-
----
-
 # What do these two have in common?
 ![bg right:70%](img/ParkingMeter.jpg)
 ![bg](img/fortnite-snake-eyes.gif)
@@ -141,6 +131,20 @@ h1 {
   They can all be simulated by state machines
 -->
 
+
+---
+
+# Enter (Finite) State Machines
+
+<!--
+
+ ask anyone if they did informatics 101
+  - A finite state machine (sometimes called a finite state automaton) is a computation model that can be implemented with hardware or software and can be used to simulate sequential logic and some computer programs. 
+  - Finite state machines can be used to model problems in many fields including mathematics, artificial intelligence, games, and linguistics.
+  - Finite state automata generate regular languages. 
+-->
+
+
 ---
 
 
@@ -148,9 +152,6 @@ h1 {
 
 
 <!--
-
- ask anyone if they did informatics 101
-
  A FSM is a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of states at any given time. it can change from one state to another in response to some inputs; the change from one state to another is called a transition.[1] An FSM is defined by a list of its states, its initial state, and the inputs that trigger each transition
 --->
 
@@ -182,22 +183,34 @@ final state
 
 # A litte bit about XState
 
-- JS / TS finite state machines for modern apps
-- by [@davidkpiano](https://github.com/davidkpiano) et al.
-- very active and lovely community [(discord)](https://discord.gg/xstate)
-- https://stately.ai/editor <- visual editor also
-- Really good VSCode Plugin
-- Automatic typegen for machines
+* JS / TS finite state machines for modern apps
+* by [@davidkpiano](https://github.com/davidkpiano) et al.
+* very active and lovely community [(discord)](https://discord.gg/xstate)
+* https://stately.ai/editor <- visual editor also
+* Really good VSCode Plugin
+* Automatic typegen for machines
 
 ![bg right:35% 80%](https://raw.githubusercontent.com/statelyai/public-assets/main/logos/xstate-logo-black-nobg.svg)
 
 <!--
   - by 
 -->
-
 ---
 
 # Modelling a my cat with XState
+
+
+---
+
+![bg height:90%](img/excalidraw_cat.svg)
+
+<!---
+1. First draw your finite state machine. I like excalidraw
+2. Think of all the states
+3. Think of the conditions
+4. etc
+--->
+
 ---
 
 <!-- _header: 'Modelling My Cat' -->
@@ -570,9 +583,26 @@ const isAsleep = useSelector(catService,
 return (isAsleep && <Spinner>)
 ```
 
+
+---
+# Some things to keep in mind
+
+* Fast refresh breaks if you change the state machine definition `;_;`
+* Name your actions/services/guards, trust me.
+* Keep state / context lean.
+* If you listen to the whole machine state on views that are mounted, the views will re-render
+* prefer `useSelector` to `useActor` and grab only what you need from your context / state
+* nativeStackNavigator -> `freezeOnBlur: true` screenOption
+
+
 ---
 
-# Why do this:
+`<!-- Intermezzo --->`
+
+
+---
+
+# Why do XState:
 
 * Separates your logic and services from your view layer.
 * Keeps views short and clean
@@ -582,17 +612,37 @@ return (isAsleep && <Spinner>)
 * Complex flows and logic doesn't mean complex views.
 * Flipper Plugin `react-native-flipper-xstate`
 
+
 ---
-# Some things to keep in mind
 
-* Autorefresh doesn't work if you change the state machine code `;_;`
-* Name your actions, trust me.
-* Keep state / context lean
-* If you listen to the state on views that are mounted, the views will refresh
-* prefer `useSelector` to `useActor` and grab only what you need from your context / state
-* nativeStackNavigator -> `freezeOnBlur` screenOption
+## Why dont I just use `(redux|jotai|zustand|useReducer|immer|$library)` ?
+
+* do whatever floats your boat idgaf
 
 
+<!--
+also point out the fact that
+* Guess what you're using FSMs whether you like them or not
+--->
+
+---
+
+* You can use `$your_library_here` and interop via side effects (actions!)
+* Forces you think of all the states of your app / flow
+* State vs Context
+* A good UX designer will have made a UI flow on figma that will look a bit like a FSM
+* Try it for one flow/feature in your app and see how you do
+
+
+<!-- 
+  you can have between=machine communication, or send things somewhere else via actions
+--->
+---
+
+## When should I not use a FSM
+
+* When the potential number of states is _infinite_ 
+* When there are very few states
 ---
 <!---
 _header: 'A real life specimen of Anyone Post-call review machine'
@@ -601,6 +651,7 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 
 
 ---
+
 ![bg 100%](img/signup_flow_machine.png)
 
 
