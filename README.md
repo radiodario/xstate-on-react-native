@@ -58,7 +58,7 @@ h1 {
 </style>
 # WRONG!
 
-# This is a photo of a typical react native project
+# This is a photo of what a typical react native project looks like to a new dev who joins your team
 
 ![bg](img/ModularSynth.gif)
 
@@ -114,11 +114,11 @@ h1 {
 
 ---
 
-# Face it, you make forms for a living.
+# Face it, we make forms for a living.
 
 ---
 
-# And making forms shouldn't be that hard
+# And making forms shouldn't be this hard
 ![bg left](img/formsBernard.gif)
 
 ---
@@ -604,9 +604,9 @@ return (isAsleep && <Spinner>)
 
 # Why do XState:
 
-* Separates your logic and services from your view layer.
+* Separates your logic from your side effects and views
 * Keeps views short and clean
-* Reusable services / actions - swap out logic for mocks in tests
+* Reusable services / actions - swap out logic for mocks in tests or different applications
 * Do Model Based Testing ([it's _mental_](https://www.youtube.com/watch?v=tpNmPKjPSFQ))
 * Rearranging flows / moving things around is easy - just modify the transitions
 * Complex flows and logic doesn't mean complex views.
@@ -658,10 +658,10 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 ---
 ### References and further reading
 
-* [Finite State Machines (pdf) - David Wright](https://web.archive.org/web/20140327131120/http://www4.ncsu.edu/~drwrigh3/docs/courses/csc216/fsm-notes.pdf)
-* [State machines are wonderful tools - Chris Wellons](https://nullprogram.com/blog/2020/12/31/)
-* [Rage Against the Finite-State Machines](https://learnyousomeerlang.com/finite-state-machines)
-* [Integrating XState with React Native and React Navigation - Simone D'Avico](https://medium.com/welld-tech/integrate-xstate-with-react-native-and-react-navigation-21ead87391da)
+- [Finite State Machines (pdf) - David Wright](https://web.archive.org/web/20140327131120/http://www4.ncsu.edu/~drwrigh3/docs/courses/csc216/fsm-notes.pdf)
+- [State machines are wonderful tools - Chris Wellons](https://nullprogram.com/blog/2020/12/31/)
+- [Rage Against the Finite-State Machines](https://learnyousomeerlang.com/finite-state-machines)
+- [Integrating XState with React Native and React Navigation - Simone D'Avico](https://medium.com/welld-tech/integrate-xstate-with-react-native-and-react-navigation-21ead87391da)
 
 ---
 # Question Time
