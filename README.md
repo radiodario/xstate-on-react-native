@@ -46,9 +46,13 @@ Dario Villanueva
 
 <!-- Who can tell me what this is -->
 ---
-<!--
-_color: white
--->
+<style scoped>
+h1 {
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.6);
+}
+</style>
 # WRONG!
 
 # This is a photo of a typical react native project
@@ -64,9 +68,13 @@ _color: white
 
 ---
 
-<!--
-_color: white
--->
+<style scoped>
+h1 {
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.6);
+}
+</style>
 
 # WRONG!
 
@@ -81,10 +89,15 @@ _color: white
 <!-- Who can tell me what this is -->
 
 ---
-<!--
-_color: white
--->
 # WRONG!
+
+<style scoped>
+h1 {
+  text-align: center;
+  color: white;
+  background: rgba(0,0,0,0.6);
+}
+</style>
 
 # This is just a photo of a bunch of cats sitting in boxes
 
