@@ -229,7 +229,7 @@ final state
 # Anatomy of a Cat Machine
 
 ```tsx
-import { assign, createMachine } from "xstate";
+import { createMachine } from "xstate";
 
 const CatMachine = createMachine(
   {
@@ -343,7 +343,7 @@ aka your _infinite_ "states"
 ```tsx
 context: {
   lives: 9,
-  mood: 'disappointed',
+  name: 'Tiga',
   awokenAt: new Date(),
 },
 ```
@@ -522,7 +522,7 @@ const HungryScreen = () => {
     <View>
       <Text>{livesRemaining} lives</Text>
       <Image src="@assets/hungry-cat" />
-      <Button onPress={() => cat.send('FEED')} />
+      <Button onPress={() => catService.send('FEED')} />
     </View>
   )
 };
