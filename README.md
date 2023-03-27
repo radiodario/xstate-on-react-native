@@ -329,8 +329,10 @@ actions: {
 ```
 
 <!--
+Fire and foreget
 Logging something to the console
 Assigning a value to a variable
+Saving something to state (i.e. trigger a redux action?)
 Changing the attribute of a DOM node
 --->
 
@@ -386,10 +388,10 @@ The assign action can be used to assign values to the context, and the context c
 ```
 
 <!--
-- long running
+- long running tasks - loading data, 
 - promises
-- observables
-- other machines
+- observables (i.e. websockets?)
+- other machines (composing)
 -->
 
 ---
@@ -404,7 +406,7 @@ asleep: {
     onDone: {
       // what to do when your service finishes
       // aka your promise returns
-      target: 'hungry',
+      target: 'awake',
     },
     onError: {
       // error handling
@@ -658,10 +660,11 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 ---
 ### References and further reading
 
-- [Finite State Machines (pdf) - David Wright](https://web.archive.org/web/20140327131120/http://www4.ncsu.edu/~drwrigh3/docs/courses/csc216/fsm-notes.pdf)
+- [Course notes on Finite State Machines (pdf) - David Wright](https://web.archive.org/web/20140327131120/http://www4.ncsu.edu/~drwrigh3/docs/courses/csc216/fsm-notes.pdf)
 - [State machines are wonderful tools - Chris Wellons](https://nullprogram.com/blog/2020/12/31/)
-- [Rage Against the Finite-State Machines](https://learnyousomeerlang.com/finite-state-machines)
+- [Rage Against the Finite-State Machines - (Erlang)](https://learnyousomeerlang.com/finite-state-machines)
 - [Integrating XState with React Native and React Navigation - Simone D'Avico](https://medium.com/welld-tech/integrate-xstate-with-react-native-and-react-navigation-21ead87391da)
+- [XState example library](https://xstate.js.org/docs/examples/todomvc.html)
 
 ---
 # Question Time
