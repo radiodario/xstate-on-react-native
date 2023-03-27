@@ -365,7 +365,7 @@ The assign action can be used to assign values to the context, and the context c
 --->
 
 ---
-# Services :loop: (soon to be renamed to Actors)
+# Services :loop: (soon to be renamed Actors)
 
 ~~Services~~ Actors model long running processes
 
