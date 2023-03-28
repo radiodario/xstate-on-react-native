@@ -17,16 +17,22 @@ paginate: true
 Dario Villanueva 
 `@radiodario`
 
+<!--
+* Thank everyone for attending
+* this talk is going to the concept of finite state machines
+* More importantly, how to create them with XState and some learnings
+-->
 
 ---
 
 # a bit about me:
 
 * [@radiodario](github.com/radiodario)
+* ex CTO at dating app Feeld.co
+* ex Meta Reality Labs (Portal for Work)
 * Bulding [Anyone](callinganyone.com) - a Voice Networking App
-* ex Meta Reality Labs
-* ex CTO at Feeld.co
 
+![bg right](img/dario-3D.gif)
 
 ---
 
