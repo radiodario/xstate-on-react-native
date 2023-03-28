@@ -571,11 +571,14 @@ it's up to you to use this way
 const catService = useContext(MyStateMachineContext)
 const [currentState, send] = useActor(catService)
 
-// `can` will evaluate to true if the current state has any
-// valid transitions in the current state for that event
-
-<Button disabled={currentState.can('FEED')} />
-
+<Button 
+  // `can` will evaluate to true if the current state has any
+  // valid transitions in the current state for that event
+  disabled={!currentState.can('FEED')} 
+  // you can use long running states (i.e. services/actors)
+  // to derive cool stuff like loading 
+  loading={currentState.matches('eating')}
+/>
 
 // you can show a spinner for long running services
 const isAsleep = useSelector(catService, 
@@ -591,10 +594,10 @@ return (isAsleep && <Spinner>)
 
 * Fast refresh breaks if you change the state machine definition `;_;`
 * Name your actions/services/guards, trust me.
-* Keep state / context lean.
+* Keep state and context lean.
 * If you listen to the whole machine state on views that are mounted, the views will re-render
-* prefer `useSelector` to `useActor` and grab only what you need from your context / state
-* nativeStackNavigator -> `freezeOnBlur: true` screenOption
+* Prefer `useSelector` to `useActor` and grab only what you need from your context
+* `nativeStackNavigator` -> `freezeOnBlur: true` in `screenOptions`
 
 
 ---
