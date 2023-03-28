@@ -164,7 +164,7 @@ h1 {
 ---
 
 
-# he's literally reading out the Wikipedia definition right now smh
+# he's literally reading out the Wikipedia definition right now smh :facepalm:
 
 <!--
  A FSM is a mathematical model of computation. It is an abstract machine that can be in exactly one of a finite number of states at any given time. it can change from one state to another in response to some inputs; the change from one state to another is called a transition.[1] An FSM is defined by a list of its states, its initial state, and the inputs that trigger each transition
