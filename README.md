@@ -691,4 +691,4 @@ _header: 'A real life specimen of Anyone Post-call review machine'
 
 # slides are there 😎👉👉
 
-![bg right:40% 80%](https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fradiodario.github.io%2Fxstate-on-react-native%2F&chs=400x400&chld=L|0)
+![bg right:40% 80%](https://chart.googleapis.com/chart?cht=qr&chl=http%3A%2F%2Fgithub.com%2Fradiodario%2Fxstate-on-react-native%2F&chs=400x400&chld=L|0)
