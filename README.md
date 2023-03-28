@@ -193,6 +193,7 @@ final state
 * by [@davidkpiano](https://github.com/davidkpiano) et al.
 * very active and lovely community [(discord)](https://discord.gg/xstate)
 * https://stately.ai/editor <- visual editor also
+* Framework agnostic but good integrations with (react, vue, immer, svelte)
 * Really good VSCode Plugin
 * Automatic typegen for machines
 
@@ -205,6 +206,9 @@ final state
 
 # Modelling a my cat with XState
 
+<!--
+* Let's learn a bit about state by modelling my cat
+-->
 
 ---
 
@@ -583,7 +587,7 @@ const [currentState, send] = useActor(catService)
   disabled={!currentState.can('FEED')} 
   // you can use long running states (i.e. services/actors)
   // to derive cool stuff like loading 
-  loading={currentState.matches('eating')}
+  loading={currentState.matches('alive.eating')}
 />
 
 // you can show a spinner for long running services
